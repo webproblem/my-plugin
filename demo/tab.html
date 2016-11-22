@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+   <head>
+       <title>Tab选项卡</title>
+	   <meta charset="utf-8">
+	   <script src="./jquery.js"></script>
+	   <script src="./tab.js"></script>
+	   <style>
+	       *{padding: 0;margin: 0;}
+           .content-tabs {
+			    position: relative;
+			    height: 42px;
+			    background: #fafafa;
+			    line-height: 40px
+			}
+			.page-tabs a {
+			    display: block;
+			    float: left;
+			    border-right: solid 1px #eee;
+			    padding: 0 15px;
+			    color: #fff;
+			    background: #EC0D35;
+			    text-decoration: none;
+			}
+			nav.page-tabs {
+			    margin-left: 40px;
+			    width: 100000px;
+			    height: 40px;
+			    overflow: hidden
+			}
+			nav.page-tabs .page-tabs-content {
+			    float: left
+			}
+            .content-tabs button {
+			    background: #fff;
+			    border: 0;
+			    height: 40px;
+			    width: 40px;
+			    outline: 0;
+			    cursor: pointer;
+			}
+			.content-tabs .roll-nav,.page-tabs-list {
+			    position: absolute;
+			    width: 40px;
+			    height: 40px;
+			    text-align: center;
+			    color: #999;
+			    z-index: 2;
+			    top: 0
+			}
+			.content-tabs .roll-left {
+			    left: 0;
+			    border-right: solid 1px #eee
+			}
+			.content-tabs .roll-right {
+			    right: 0;
+			    border-left: solid 1px #eee
+			}
+			.page-tabs a.active {
+			    background: #2f4050;
+			    color: #a7b1c2
+			}
+	   </style>
+   </head>
+   <body>
+     <div class="content-tabs">
+     	<button class="roll-nav roll-left J_tabLeft"><i class="fa fa-backward"><<</i></button>
+        <nav class="page-tabs J_menuTabs">
+           <div class="page-tabs-content">
+           </div>
+        </nav>
+        <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward">>></i></button>
+     </div>
+     <script>
+        //@desc:循环出30个选项卡
+        for(var i=0; i<30; i++){
+        	$('.page-tabs-content').append("<a href='javascript:;' class='J_menuTab'>Tab"+(i+1)+"</a>");
+        }
+        //@desc:默认第一个选项卡选中
+        $('.page-tabs-content').children().first().addClass('active');
+        
+        //@desc:启用Tab选项卡插件
+        var TabMenu = $('.content-tabs').menuTab({
+        	'content_tab':'.content-tabs',
+        	'nav_tab':'.page-tabs',
+        	'tab_list':'.page-tabs-content'
+        });
+        //@desc:向右滚动
+        $('.J_tabRight').on('click',function(){
+        	TabMenu.nextTab();
+        })
+        //@desc:向左滚动
+        $('.J_tabLeft').on('click',function(){
+        	TabMenu.prevTab();
+        })
+        //@desc:点击Tab选项卡自身滚动
+        $('.J_menuTab').on('click',function(){
+        	$('.J_menuTab.active').removeClass('active');
+        	$(this).addClass('active');
+        	TabMenu.goTab($(this));
+        })
+     </script>
+   </body>
+</html>
