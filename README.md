@@ -30,7 +30,8 @@
 1. jade  
 2. juicer
 
-*   > inside a list item.
+*   > inside a list item.  
+
 > * 以下可以作为兴趣了解学习部分
 * > 服务器端: nodejs
 * > 网络爬虫
