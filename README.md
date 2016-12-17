@@ -1,11 +1,7 @@
 # hello-world
 ## My first repository on GitHub
 > my Blog address:
-[http://www.cnblogs.com/yqx0605xi/](http://www.cnblogs.com/yqx0605xi/)
-***
-## 前端学习清单与计划 ##
-> ## 学习清单
-
+[http://www.cnblogs.com/yqx0605xi/](http://www.cnblogs.com/yqx0605xi/)  
 * 前端万变不离其中的基础(必须熟悉掌握)：  
 1. css(css3)  
 2. html(html5)  
