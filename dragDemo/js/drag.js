@@ -1,21 +1,15 @@
 ;(function(window,document){
     var eventUtil = {
-    	/*getElement: function(opt,element){
-    		var allTag = element!=undefined?element.getElementsByTagName("*"):document.getElementsByTagName("*");
-    		var eles = [];
-	    	for(var i=0,l=allTag.length; i<l; i++){
-	    		if(allTag[i].getAttribute(opt)){
-	                eles.push(allTag[i]);
-	    		}
-	    	}
-	    	return eles;
-    	},
-    	getContentElement: function(m){
-    		return this.getElement(m);
-    	},
-    	getDragElement: function(m,element){
-    		return this.getElement(m,element);
-        },*/
+	    getElement: function(opt){
+		    var allTag = document.querySelectorAll("*");
+			var eles = [];
+			allTag.forEach(function(v,i){
+			    if(allTag[i].getAttribute(opt)){
+				    eles.push(allTag[i]);    
+				}
+			})
+			return eles;
+		}, 
         getEvent: function(e){
         	return e ? e : window.event;
         }
@@ -81,19 +75,14 @@
             this.contentElement.style.top = option.y + "px";
         }
     }
-    //var contents = eventUtil.getContentElement("data-drag-content");
-    var Drags,contentElement,dragElement;
-    /*for(var k=0,c=contents.length; k<c; k++){
-    	Drags = new Drag();
-        contentElement = contents[k];
-        dragElement = eventUtil.getDragElement("data-drag",contents[k])[0];
-    	dragElement.onmousedown =  function(e){
-            Drags.mouseDown(e,{"contentElement": contentElement,"dragElement": this});
-        }
-    }*/
-    Drags = new Drag();
-    $("[data-drag]").mousedown(function(e){
-        Drags.mouseDown(
-            e,{"contentElement":$(this).parents("[data-drag-content]").get(0),"dragElement":this});
-    })
+    dragElement = eventUtil.getElement("data-drag");
+	dragElement.forEach(function(v,i){
+	    var Drags = new Drag();
+	    dragElement[i].onmousedown = function(e){
+		    Drags.mouseDown(
+                e,{"contentElement":dragElement[i].parentNode,"dragElement":this}
+			);
+		}
+	})
+	
 })(window,document)
