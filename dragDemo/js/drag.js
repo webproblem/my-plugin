@@ -1,7 +1,7 @@
 ;(function(window,document){
     var eventUtil = {
 	    getElement: function(opt){
-		    var allTag = document.querySelectorAll("*");
+		    var allTag = Array.prototype.slice.call(document.querySelectorAll("*"));
 			var eles = [];
 			allTag.forEach(function(v,i){
 			    if(allTag[i].getAttribute(opt)){
