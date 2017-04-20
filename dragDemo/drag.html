@@ -5,7 +5,7 @@
 	   <meta charset="utf-8">
      <style>
         *{margin: 0;padding: 0;}
-        .dragview_wrap{width: 300px;height: 200px;background: #ccc;border: 1px solid #ccc;position: absolute;z-index: 99999;}
+        .dragview_wrap{width: 400px;height: 300px;background: #ccc;border: 1px solid #ccc;position: absolute;z-index: 99999;}
         .dragview_area{width: 100%;height: 30px;background: blue;line-height: 30px;text-align: center;color: #fff;}
 		.dragview_move{
 		    display: none;
@@ -22,6 +22,7 @@
 			cursor:move;
 		}
 		.dragview_dummy_wrap{border: 2px solid #000}
+		.dragview_dummy_wrap2{border: 2px solid red}
      </style>
     </head>
     <body>
@@ -34,10 +35,11 @@
        <script src="./js/drag2.js"></script>
 	   <script>
 	       new DragView({
-		       "dragWrap": document.getElementById("drag_wrap"),    //容器
-			   "dragableArea": document.getElementById("drag_area"),  //可拖拽区域
-			   "isDrag": true,  //是否可拖拽
-			   "isDummyWrap": true //是否需要虚拟拖拽框
+		       "dragWrap": document.getElementById("drag_wrap"),    //容器，必选
+			   "dragableArea": document.getElementById("drag_area"),  //可拖拽区域，可选
+			   "isDrag": true,  //是否可拖拽，可选
+			   "isDummyWrap": true, //是否需要虚拟拖拽框，可选
+			   "dummyWrapClass": "dragview_dummy_wrap2" //控制虚拟拖拽框的样式，可选
 		   })
 	   </script>
     </body>

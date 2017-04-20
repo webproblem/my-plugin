@@ -1,15 +1,17 @@
-(function(window,document){
+(function(window,document,undefined){
     var _DragView = DragView;
     var DragView = function(options){
 	    this.defaultSettings = {
 		    "dragWrap": document.body,
+			"dragableArea": document.body,
 			"isDrag": true,
 			"isDummyWrap": true,
-			"dragStatus": true,
-			"tempDragWrap": document.body
+			"dummyWrapClass": "dragview_dummy_wrap",
+			"dragStatus": false
 		};
-		this.defaultSettings.dragableArea = this.defaultSettings.dragWrap;
 		this.options = this.extend(this.defaultSettings,options);
+		this.options.tempDragWrap = this.options.dragWrap;
+		this.options.dragableArea = this.options.dragableArea ? this.options.dragableArea : this.options.dragWrap;
         this.init();
     }
 	DragView.prototype = {
@@ -32,7 +34,7 @@
 				      setting[attr] = option[attr];
 				  }
 			  }
-			  return option;
+			  return setting;
 		    },
 		    "mouseDown": function(e){
 				var that = this;
@@ -47,9 +49,9 @@
 				that.options.tempDragWrap = that.options.dragWrap;
 				if(this.options.isDummyWrap){
 					dragMoveArea = document.createElement("div");
-					dragMoveArea.setAttribute("class","dragview_dummy_wrap");
-					dragMoveArea.style.width = dragWrap.offsetWidth + "px";
-					dragMoveArea.style.height = dragWrap.offsetHeight + "px";
+					dragMoveArea.setAttribute("class",this.options.dummyWrapClass);
+					dragMoveArea.style.width = dragWrap.clientWidth + "px";
+					dragMoveArea.style.height = dragWrap.clientHeight + "px";
 					dragMoveArea.style.position = "absolute";
 					dragMoveArea.style.zIndex = "99999";
 					dragMoveArea.style.top = dragWrap.style.top;
@@ -63,7 +65,7 @@
 					that.mouseMove(_events,disX,disY,dragMoveArea);
 				}
 				document.onmouseup = function(){
-					that.mouseUp(dragMoveArea);
+					that.options.dragStatus && that.mouseUp(dragMoveArea);
 				}
 			},
 			"mouseMove": function(_events,disX,disY,dragMoveArea){
@@ -79,7 +81,6 @@
 						"winY": _winH,
 						"dragW": this.options.tempDragWrap.offsetWidth,
 						"dragH": this.options.tempDragWrap.offsetHeight
-                        //"dragMoveArea": dragMoveArea						
 					};
 					this.limiteRange(option);
 				}
