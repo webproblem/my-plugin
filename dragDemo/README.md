@@ -28,4 +28,4 @@
 	   "dummyWrapClass": "dragview_dummy_wrap2" //控制虚拟拖拽框的样式，可选
 	})
 
-##### 如果喜欢，请记得Star哈！
+### 如果喜欢，请记得Star哈！
