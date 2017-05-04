@@ -48,6 +48,7 @@
 	        this.creat();
 	    },
 	    creat: function(){
+	    	var _this_ = this;
 	    	var _body = $("body");
             /*var domCache = {
             	"shade":   $(".dialogView-shade"),
@@ -62,27 +63,31 @@
             if(!this.isConfig){
             	_config.shade &&  _body.append(_domCreat.shade);
             	_body.append(_domCreat.main.append(_domCreat.section.append(_domCreat.wrap.append(_domCreat.content.html(_config.defaultMsg)))));
-            	this.close(_config.defaultTime,_domCreat.main,_domCreat.shade);
+            	this.close(_domCreat.main,_domCreat.shade,_config.defaultTime);
             }else{
             	_config.shade &&  _body.append(_domCreat.shade);
             	_body.append(_domCreat.main.append(_domCreat.section.append(_domCreat.wrap.append(_domCreat.content.html(_config.message),_domCreat.buttons))));
             	_config.className && _domCreat.main.addClass(_config.className);
             	_config.buttons.forEach(function(v,i){
-            		_domCreat.buttons.append("<div data-btn='button' class='"+v.states+"'><span>"+v.text+"</span></div>");
+            		_domCreat.buttons.append("<div data-btn='button' data-state='sure' class='"+v.states+"'><span>"+v.text+"</span></div>");
             	})
+            	_domCreat.wrap.find("[data-state=sure]").click(function(){
+            		this.close(_domCreat.main,_domCreat.shade);
+            	}.bind(this))
             }
 	    },
-	    close: function(showTime,main,shade){
+	    close: function(main,shade,showTime){
 	    	var _main = main ? main : $(".dialogView-m-main");
 	    	var _shade = shade ? shade : $(".dialogView-m-shade");
+	    	var _showTime = showTime || this.config.showTime || 0;
 	    	setTimeout(function(){
 	    		_main.addClass('dialogView-m-anim-close');
                 _main.stop().unbind("click");
                 _shade && _shade.remove();
                 setTimeout(function(){
                 	_main.remove();
-                },2000)
-	    	},showTime)
+                },1000)
+	    	},_showTime)
 	    }
 	}
     dialogViewPro.prototype.init.prototype = dialogViewPro.prototype;
