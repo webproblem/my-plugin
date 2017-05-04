@@ -41,8 +41,12 @@
     	$("#button2").click(function(event) {
     		dialogView.alert({
     			message: "alert弹窗",
+    			className: "dialogView-alert",
     			buttons:[{
+    				skin: "",
+    				states: "sure",
     				text: "我知道了",
+    				showTime: 10000,
     				callback: function(){
     					//
     				}

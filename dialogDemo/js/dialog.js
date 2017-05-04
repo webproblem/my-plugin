@@ -1,6 +1,8 @@
 ;!(function(win,doc){
 	var _dialogView = dialogView;
 	var dialogView = {
+		"version": "0.0.1",
+		"author": "yqx_cn",
 		"open": function(){
 			dialogViewPro();
 			return this;
@@ -8,6 +10,9 @@
 		"alert": function(options){
 			dialogViewPro(options);
 			return this;
+		},
+		"close": function(options){
+			dialogViewPro.prototype.close(options);
 		}
 	};
 	var dialogViewPro = function(config){
@@ -30,7 +35,7 @@
 			};
 			this.domCreat = {
             	"shade":   $("<div class='dialogView-m-shade'></div>"),
-            	"main":    $("<div class='dialogView-m-main'></div>"),
+            	"main":    $("<div class='dialogView-m-main mobile-dialogView'></div>"),
             	"section": $("<div class='dialogView-m-section'></div>"),
             	"wrap":    $("<div class='dialogView-m-wrap'></div>"),
             	"content": $("<div class='dialogView-m-content'></div>"),
@@ -61,16 +66,22 @@
             }else{
             	_config.shade &&  _body.append(_domCreat.shade);
             	_body.append(_domCreat.main.append(_domCreat.section.append(_domCreat.wrap.append(_domCreat.content.html(_config.message),_domCreat.buttons))));
+            	_config.className && _domCreat.main.addClass(_config.className);
             	_config.buttons.forEach(function(v,i){
-            		_domCreat.buttons.append("<div data-btn='btn"+(i+1)+"'>"+v.text+"</div>");
+            		_domCreat.buttons.append("<div data-btn='button' class='"+v.states+"'><span>"+v.text+"</span></div>");
             	})
             }
 	    },
 	    close: function(showTime,main,shade){
+	    	var _main = main ? main : $(".dialogView-m-main");
+	    	var _shade = shade ? shade : $(".dialogView-m-shade");
 	    	setTimeout(function(){
-                main.stop().unbind("click");
-                main.remove();
-                shade && shade.remove();
+	    		_main.addClass('dialogView-m-anim-close');
+                _main.stop().unbind("click");
+                _shade && _shade.remove();
+                setTimeout(function(){
+                	_main.remove();
+                },2000)
 	    	},showTime)
 	    }
 	}
