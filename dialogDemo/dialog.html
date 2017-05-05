@@ -25,8 +25,8 @@
 	</div> -->
 
     <button id="button1">我是按钮1,不传任何参数</button>
-    <button id="button2">我是按钮2</button>
-    <button>我是按钮3</button>
+    <button id="button2">我是按钮2,默认信息框</button>
+    <button id="button3">我是按钮3,询问信息框</button>
     <button>我是按钮4</button>
     <button>我是按钮5</button>
     <button>我是按钮6</button>
@@ -41,13 +41,13 @@
     	})
     	$("#button2").click(function(event) {
     		dialogView.alert({
-    			message: "<h1>alert弹窗</h1>",
+    			message: "<h1>alert默认信息框</h1>",
     			className: "dialogView-alert",
+    			type: "alert",
     			//area: ["300px","200px"],
-    			//showTime: 10000,
+    			//showTime: 10000000,
     			buttons:[{
-    				skin: "",
-    				states: "sure",
+    				states: "yes",
     				text: "我知道了",
     				callback: function(){
     					alert("我是回调函数，点击我后弹窗会关闭");
@@ -55,6 +55,21 @@
     			}]
     		});
     	});
+    	$("#button3").click(function(){
+    		dialogView.confirm({
+    			message: "要前往我的github吗？",
+    			buttons: [{
+    				states: "yes",
+    				text: "可以",
+    				callback: function(){
+    					window.location.href="https://github.com/webproblem";
+    				}
+    			},{
+    				states: "no",
+    				text: "不要"
+    			}]
+    		})
+    	})
     </script>
 </body>
 </html>

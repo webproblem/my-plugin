@@ -49,21 +49,39 @@ button{font-size: 14px;width: 100%;background-color: green;color: #fff;padding: 
 	-webkit-animation-duration: .2s;
     animation-duration: .2s;
 }
+@-webkit-keyframes bounceIn{
+	0% {
+        opacity: 0;
+        -webkit-transform: scale(.5);
+        transform: scale(.5)
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1)
+    }
+}
 @keyframes bounceIn{
-	0% {opacity: 0;transform:scale(.5);-webkit-transform:scale(.5);}
-    100% {opacity: 1;transform:scale(1);-webkit-transform:scale(1);}
+	0% {
+        opacity: 0;
+        -webkit-transform: scale(.5);
+        transform: scale(.5)
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1)
+    }
 }
 @keyframes bounceOut{
 	100% {
         opacity: 0;
-        -webkit-transform: scale(.7);
-        -ms-transform: scale(.7);
-        transform: scale(.7)
+        -webkit-transform: scale(.5);
+        -ms-transform: scale(.5);
+        transform: scale(.5)
     }
-    30% {
-        -webkit-transform: scale(1.03);
-        -ms-transform: scale(1.03);
-        transform: scale(1.03)
     }
     0% {
         -webkit-transform: scale(1);
@@ -74,14 +92,9 @@ button{font-size: 14px;width: 100%;background-color: green;color: #fff;padding: 
 @-webkit-keyframes bounceOut{
 	100% {
         opacity: 0;
-        -webkit-transform: scale(.7);
-        -ms-transform: scale(.7);
-        transform: scale(.7)
-    }
-    30% {
-        -webkit-transform: scale(1.03);
-        -ms-transform: scale(1.03);
-        transform: scale(1.03)
+        -webkit-transform: scale(.5);
+        -ms-transform: scale(.5);
+        transform: scale(.5)
     }
     0% {
         -webkit-transform: scale(1);
@@ -94,12 +107,23 @@ button{font-size: 14px;width: 100%;background-color: green;color: #fff;padding: 
     line-height: 25px;
     text-align: center;
 }
+.dialogView-m-buttons{
+	display: -webkit-box;
+	width: 100%;
+}
 .dialogView-m-buttons [data-btn=button]{
 	padding: 10px 0;
 	line-height: 20px;
+	display: block;
+	-webkit-box-sizing: content-box;
+	box-sizing: content-box;
+	-webkit-box-flex: 1;
+	border-radius: 0 0 3px 3px;
 }
-.dialogView-m-buttons [data-btn=button].sure{
+.dialogView-m-buttons [data-btn=button].yes{
 	background-color: #2e8ded;
 	color: #fff;
-	border-radius: 0 0 3px 3px;
+}
+.dialogView-m-buttons [data-btn=button].no{
+	background-color: #eee;
 }

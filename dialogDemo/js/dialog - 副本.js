@@ -35,7 +35,9 @@
 	DialogViewPro.prototype = {
 	    init: function(config) {
 	        var _this_ = this;
-			var _config = null;this.domCreat = null;this.domCache = null;this.isConfig = false;
+			var _config = null;
+			this.domCreat = null;
+			this.isConfig = false;
 			this.config = {
 	            area: null,                              //宽高
 	            type: null,                              //类型
@@ -48,6 +50,14 @@
 	            defaultMsg: "欢迎使用",                  //默认文字
 	            defaultTime: 3000                        //默认显示时间
 			};
+			this.domCreat = {
+            	"shade":   $("<div class='dialogView-m-shade'></div>"),
+            	"main":    $("<div class='dialogView-m-main mobile-dialogView'></div>"),
+            	"section": $("<div class='dialogView-m-section'></div>"),
+            	"wrap":    $("<div class='dialogView-m-wrap'></div>"),
+            	"content": $("<div class='dialogView-m-content'></div>"),
+            	"buttons": $("<div class='dialogView-m-buttons'></div>")
+            };
             if(config && config.constructor === Object && typeof config == "object"){
 				this.isConfig = true;
 			}
@@ -57,42 +67,54 @@
 	    creat: function(){
 	    	var _this_ = this;
 	    	var _body = $("body");
+            /*var domCache = {
+            	"shade":   $(".dialogView-shade"),
+            	"main":    $(".dialogView-main"),
+            	"section": $(".dialogView-section"),
+            	"wrap":    $(".dialogView-wrap"),
+            	"content": $(".dialogView-content"),
+            	"buttons": $(".dialogView-buttons")
+            };*/
             var _config = this.config;
-            
-            var _domCreat = {},_bomCache = {};
+            //var _domCreat = this.domCreat;
+            var _domCreat = {};
             ++dialogView.index;
             _config.zIndex += dialogView.index;
-            _config.shade && (_domCreat.shade = '<div class="dialogView-m-shade" times="'+dialogView.index+'" style="z-index:'+_config.zIndex+'"></div>');
+            _config.shade && (_domCreat.shade = '<div class="dialogView-m-shade" style="z-index:'+_config.zIndex+'"></div>');
             if(!this.isConfig){
-            	_domCreat.content = '<div class="dialogView-m-main mobile-dialogView" times="'+dialogView.index+'" style="z-index:'+(_config.zIndex+1)+'"><div class="dialogView-m-section">' +
+            	_domCreat.content = '<div class="dialogView-m-main mobile-dialogView" style="z-index:'+(_config.zIndex+1)+'"><div class="dialogView-m-section">' +
 	                                '<div class="dialogView-m-wrap"><div class="dialogView-m-content">'+(_config.defaultMsg?_config.defaultMsg:"")+'</div></div></div></div>';
             }else{
-	            _domCreat.content = '<div class="dialogView-m-main mobile-dialogView '+(_config.className?_config.className:"")+'" times="'+dialogView.index+'" style="z-index:'+(_config.zIndex+1)+'"><div class="dialogView-m-section">' +
+	            _domCreat.content = '<div class="dialogView-m-main mobile-dialogView '+(_config.className?_config.className:"")+' style="z-index:'+(_config.zIndex+1)+'"><div class="dialogView-m-section">' +
 	                                '<div class="dialogView-m-wrap"><div class="dialogView-m-content">'+(_config.message?_config.message:"")+'</div>' +
 	                                '<div class="dialogView-m-buttons"></div></div></div></div>';
             }
             _body.append(_domCreat.shade,_domCreat.content);
-            _bomCache = {
-            	"shade":   $(".dialogView-m-shade[times="+dialogView.index+"]"),
-            	"main":    $(".dialogView-m-main[times="+dialogView.index+"]"),
-            	"section": $(".dialogView-m-main[times="+dialogView.index+"] .dialogView-m-section"),
-            	"wrap":    $(".dialogView-m-main[times="+dialogView.index+"] .dialogView-m-wrap"),
-            	"content": $(".dialogView-m-main[times="+dialogView.index+"] .dialogView-m-content"),
-            	"buttons": $(".dialogView-m-main[times="+dialogView.index+"] .dialogView-m-buttons")
-            };
-            !this.isConfig && this.close(_bomCache.main,_bomCache.shade,_config.defaultTime);
-            _config.showTime && (_bomCache.wrap.attr("showTime",_config.showTime),this.close(_bomCache.main,_bomCache.shade,_config.showTime));
-            this.domCreat = _domCreat;
-            this.domCache = _bomCache;
-            this.bindUI(_config,_bomCache);
+            /*if(!this.isConfig){
+            	_config.shade &&  _body.append(_domCreat.shade);
+            	_body.append(_domCreat.main.append(_domCreat.section.append(_domCreat.wrap.append(_domCreat.content.html(_config.defaultMsg)))));
+            	this.close(_domCreat.main,_domCreat.shade,_config.defaultTime);
+            }else{
+            	_config.shade &&  _body.append(_domCreat.shade);
+            	_body.append(_domCreat.main.append(_domCreat.section.append(_domCreat.wrap.append(_domCreat.content.html(_config.message),_domCreat.buttons))));
+            	_config.className && _domCreat.main.addClass(_config.className);
+            	if(_config.area && commonsPart.isArray(_config.area)){
+            		_config.area[0] && _domCreat.wrap.css("width",_config.area[0]);
+            		_config.area[1] && _domCreat.wrap.css("height",_config.area[1]);
+            	}
+            	this.bindUI(_config,_domCreat);
+            }
+            _config.showTime && (_domCreat.wrap.attr("showTime",_config.showTime),this.close(_domCreat.main,_domCreat.shade,_config.showTime));
+            _config.shade && _domCreat.shade && _domCreat.shade.css("z-index",_config.zIndex);
+            _domCreat.main && _domCreat.main.css("z-index",(_config.zIndex+1));*/
 	    },
-	    bindUI: function(_config,_bomCache){ 
+	    bindUI: function(_config,_domCreat){ 
 	    	if(commonsPart.isArray(_config.buttons)){
 		    	_config.buttons.forEach(function(v,i){
 	        		var _states = v.states ? v.states : "";
 	        		var _text = v.text ? v.text : _config.defaultText;
                     var buttonWrap = $("<span data-btn='button' data-state='"+_states+"' class='"+_states+"'>"+_text+"</span>");
-	        		_bomCache.buttons.append(buttonWrap);
+	        		_domCreat.buttons.append(buttonWrap);
 	        		if(commonsPart.isFunction(v.callback)){
 	        			buttonWrap.click(function(){
 	        				v.callback();
@@ -100,8 +122,8 @@
 	        		}
 	        	})
 	        }
-        	_bomCache.wrap.find("[data-state]").click(function(){
-        		this.close(_bomCache.main,_bomCache.shade);
+        	_domCreat.wrap.find("[data-state]").click(function(){
+        		this.close(_domCreat.main,_domCreat.shade);
         	}.bind(this))
 	    },
 	    close: function(main,shade,showTime){
