@@ -34,21 +34,23 @@
     <button>我是按钮8</button>
     <button>我是按钮9</button>
 
+
     <script>
     	$("#button1").click(function(){
     		dialogView.open();
     	})
     	$("#button2").click(function(event) {
     		dialogView.alert({
-    			message: "alert弹窗",
+    			message: "<h1>alert弹窗</h1>",
     			className: "dialogView-alert",
+    			//area: ["300px","200px"],
+    			//showTime: 10000,
     			buttons:[{
     				skin: "",
     				states: "sure",
     				text: "我知道了",
-    				showTime: 10000,
     				callback: function(){
-    					//
+    					alert("我是回调函数，点击我后弹窗会关闭");
     				}
     			}]
     		});
