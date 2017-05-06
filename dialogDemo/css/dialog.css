@@ -72,7 +72,7 @@ button{font-size: 14px;width: 100%;background-color: green;color: #fff;padding: 
 	-webkit-box-flex: 1;
 	border-radius: 0 0 3px 3px;
 	background-color: #F2F2F2;
-	color: #40AFFE;
+	color: #40AFFE; 
 }
 .dialogView-m-buttons [data-btn=button].yes{
 	background-color: #2e8ded;
