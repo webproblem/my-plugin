@@ -11,9 +11,9 @@
 			return data && typeof data =="function" && Function == data.constructor;
 		},
 		isEmptyObject: function(data,clearData){
-			clearData && delete data[clearData];
 			for (var key in data) {
-			    return false;
+			    if(key!=clearData)
+			        return false;
 			}
 			return true;
 		}
