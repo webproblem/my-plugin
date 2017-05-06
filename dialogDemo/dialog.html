@@ -5,25 +5,12 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<title>移动端dialog</title>
+	<link rel="stylesheet" href="./css/demo.css">
 	<link rel="stylesheet" href="./css/dialog.css">
 	<script src="./js/jquery.js"></script>
 	<script src="./js/dialog.js"></script>
 </head>
 <body>
-    <!-- <div class="dialogView-shade">
-    </div>
-	<div class="dialogView-main">
-	    <div class="dialogView-section">
-	    	<div class="dialogView-wrap">
-		    	<div class="dialogView-content">
-			    	欢迎访问
-			    </div>
-			    <div class="dialogView-buttons">
-			    </div>
-		    </div>
-	    </div>
-	</div> -->
-
     <button id="button1">我是按钮1,不传任何参数</button>
     <button id="button2">我是按钮2,默认信息框</button>
     <button id="button3">我是按钮3,询问信息框</button>
@@ -84,7 +71,8 @@
         		title: [
                     "我是自定义标题"
     			],
-    			message: "自定义风格标题,第一个参数为标题内容,第二个参数为自定义的样式"
+    			message: "自定义风格标题,第一个参数为标题内容,第二个参数为自定义的样式",
+    			shadeClose: true
         	})
         });
     </script>

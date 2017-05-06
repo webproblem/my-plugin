@@ -1,7 +1,6 @@
-*{padding: 0;margin: 0;}
-body{padding: 20px;font-size: 14px;}
-button{font-size: 14px;width: 100%;background-color: green;color: #fff;padding: 10px;margin: 20px 0;border-radius: 5px;}
-
+.mobile-dialogView {
+	position: fixed;
+}
 .dialogView-m-shade{
 	background-color: #000;
 	opacity: 0.3;
@@ -22,7 +21,7 @@ button{font-size: 14px;width: 100%;background-color: green;color: #fff;padding: 
 	animation: bounceIn .5s;
 	-webkit-animation: bounceIn .5s;
 }
-.mobile-dialogView.dialogView-m-main{
+.dialogView-m-aniamte.dialogView-m-main{
 	-webkit-animation-fill-mode: both;
     animation-fill-mode: both;
     -webkit-animation-duration: .3s;
@@ -53,6 +52,7 @@ button{font-size: 14px;width: 100%;background-color: green;color: #fff;padding: 
 	padding: 15px 0px;
 	background-color: #FF4351;
     color: #fff;
+    border-radius: 3px 3px  0px 0px;
 }
 .dialogView-m-main .dialogView-m-content{
 	padding: 50px 30px;
@@ -70,9 +70,12 @@ button{font-size: 14px;width: 100%;background-color: green;color: #fff;padding: 
 	-webkit-box-sizing: content-box;
 	box-sizing: content-box;
 	-webkit-box-flex: 1;
-	border-radius: 0 0 3px 3px;
+	border-radius: 0 0 0px 3px;
 	background-color: #F2F2F2;
 	color: #40AFFE;
+}
+.dialogView-m-buttons [data-btn=button]:nth-last-child(1){
+    border-radius: 0 0 3px 3px;
 }
 .dialogView-m-buttons [data-btn=button].yes{
 	background-color: #2e8ded;
@@ -80,6 +83,7 @@ button{font-size: 14px;width: 100%;background-color: green;color: #fff;padding: 
 }
 .dialogView-m-buttons [data-btn=button].no{
 	background-color: #eee;
+	color: #FD482C;
 }
 /*=========== skin ==================*/
 /*msg皮肤*/
