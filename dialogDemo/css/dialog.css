@@ -28,12 +28,12 @@ button{font-size: 14px;width: 100%;background-color: green;color: #fff;padding: 
     -webkit-animation-duration: .3s;
     animation-duration: .3s;
 }
-.dialogView-m-section{
+.dialogView-m-main .dialogView-m-section{
 	display: table-cell;
     vertical-align: middle;
     text-align: center;
 }
-.dialogView-m-wrap{
+.dialogView-m-main .dialogView-m-wrap{
 	background: #fff;
 	border-radius: 3px;
 	width: 90%;
@@ -49,6 +49,51 @@ button{font-size: 14px;width: 100%;background-color: green;color: #fff;padding: 
 	-webkit-animation-duration: .2s;
     animation-duration: .2s;
 }
+.dialogView-m-main .dialogView-m-title{
+	padding: 15px 0px;
+	background-color: #FF4351;
+    color: #fff;
+}
+.dialogView-m-main .dialogView-m-content{
+	padding: 50px 30px;
+    line-height: 25px;
+    text-align: center;
+}
+.dialogView-m-main .dialogView-m-buttons{
+	display: -webkit-box;
+	width: 100%;
+}
+.dialogView-m-buttons [data-btn=button]{
+	padding: 10px 0;
+	line-height: 20px;
+	display: block;
+	-webkit-box-sizing: content-box;
+	box-sizing: content-box;
+	-webkit-box-flex: 1;
+	border-radius: 0 0 3px 3px;
+	background-color: #F2F2F2;
+	color: #40AFFE;
+}
+.dialogView-m-buttons [data-btn=button].yes{
+	background-color: #2e8ded;
+	color: #fff;
+}
+.dialogView-m-buttons [data-btn=button].no{
+	background-color: #eee;
+}
+/*=========== skin ==================*/
+/*msg皮肤*/
+.dialogView-m-main .dialogView-m-msg{
+	width: auto;
+	background-color: #000;
+	color: #fff;
+	opacity: .6;
+	margin: 0px 7px;
+}
+.dialogView-m-msg .dialogView-m-content{
+	padding: 15px;
+}
+/*=============== animate ==================*/
 @-webkit-keyframes bounceIn{
 	0% {
         opacity: 0;
@@ -101,29 +146,4 @@ button{font-size: 14px;width: 100%;background-color: green;color: #fff;padding: 
         -ms-transform: scale(1);
         transform: scale(1)
     }
-}
-.dialogView-m-content{
-	padding: 50px 30px;
-    line-height: 25px;
-    text-align: center;
-}
-.dialogView-m-buttons{
-	display: -webkit-box;
-	width: 100%;
-}
-.dialogView-m-buttons [data-btn=button]{
-	padding: 10px 0;
-	line-height: 20px;
-	display: block;
-	-webkit-box-sizing: content-box;
-	box-sizing: content-box;
-	-webkit-box-flex: 1;
-	border-radius: 0 0 3px 3px;
-}
-.dialogView-m-buttons [data-btn=button].yes{
-	background-color: #2e8ded;
-	color: #fff;
-}
-.dialogView-m-buttons [data-btn=button].no{
-	background-color: #eee;
 }

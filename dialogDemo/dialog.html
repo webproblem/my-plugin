@@ -27,12 +27,12 @@
     <button id="button1">我是按钮1,不传任何参数</button>
     <button id="button2">我是按钮2,默认信息框</button>
     <button id="button3">我是按钮3,询问信息框</button>
-    <button>我是按钮4</button>
-    <button>我是按钮5</button>
-    <button>我是按钮6</button>
-    <button>我是按钮7</button>
-    <button>我是按钮8</button>
-    <button>我是按钮9</button>
+    <button id="button4">我是按钮4,提示类型框</button>
+    <button id="button5">我是按钮5,自定义弹窗标题</button>
+    <button id="button6">我是按钮6</button>
+    <button id="button7">我是按钮7</button>
+    <button id="button8">我是按钮8</button>
+    <button id="button9">我是按钮9</button>
 
 
     <script>
@@ -41,13 +41,14 @@
     	})
     	$("#button2").click(function(event) {
     		dialogView.alert({
-    			message: "<h1>alert默认信息框</h1>",
+    			message: "<h3>alert默认信息框</h3>",
     			className: "dialogView-alert",
-    			type: "alert",
+    			//type: "alert",
     			//area: ["300px","200px"],
     			//showTime: 10000000,
+    			//skin:"",
     			buttons:[{
-    				states: "yes",
+    				skin: "yes",
     				text: "我知道了",
     				callback: function(){
     					alert("我是回调函数，点击我后弹窗会关闭");
@@ -59,17 +60,33 @@
     		dialogView.confirm({
     			message: "要前往我的github吗？",
     			buttons: [{
-    				states: "yes",
+    				skin: "yes",
     				text: "可以",
     				callback: function(){
     					window.location.href="https://github.com/webproblem";
     				}
     			},{
-    				states: "no",
+    				skin: "no",
     				text: "不要"
     			}]
     		})
     	})
+    	$("#button4").click(function(event) {
+    		dialogView.open({
+    			type: "msg",
+    			message: "我是提示类型框",
+    			shade: false,
+    			showTime: 2000
+    		})
+    	});
+        $("#button5").click(function(event) {
+        	dialogView.open({
+        		title: [
+                    "我是自定义标题"
+    			],
+    			message: "自定义风格标题,第一个参数为标题内容,第二个参数为自定义的样式"
+        	})
+        });
     </script>
 </body>
 </html>

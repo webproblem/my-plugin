@@ -12,17 +12,17 @@
 		"version": "0.0.1",
 		"author": "yqx_cn",
 		"index": 0,
-		"type": ["alert","confirm","waiting","warning","msg"],
-		"open": function(){
-			DialogViewPro();
+		"type": ["alert","confirm","msg","waiting","warning"],
+		"open": function(options){
+			DialogViewPro(options);
 			return this;
 		},
 		"alert": function(options){
-			DialogViewPro(options);
+			DialogViewPro($.extend({}, {type: this.type[0]}, options));
 			return this;
 		},
 		"confirm": function(options){
-			DialogViewPro(options);
+			DialogViewPro($.extend({}, {type: this.type[1]}, options));
 			return this;
 		},
 		"close": function(options){
@@ -35,8 +35,9 @@
 	DialogViewPro.prototype = {
 	    init: function(config) {
 	        var _this_ = this;
-			var _config = null;this.domCreat = null;this.domCache = null;this.isConfig = false;
+			this.domCreat = null;this.domCache = null;this.isConfig = false;
 			this.config = {
+				title: null,                              //标题
 	            area: null,                              //宽高
 	            type: null,                              //类型
 	            buttons: null,                           //按钮
@@ -58,7 +59,6 @@
 	    	var _this_ = this;
 	    	var _body = $("body");
             var _config = this.config;
-            
             var _domCreat = {},_bomCache = {};
             ++dialogView.index;
             _config.zIndex += dialogView.index;
@@ -68,7 +68,7 @@
 	                                '<div class="dialogView-m-wrap"><div class="dialogView-m-content">'+(_config.defaultMsg?_config.defaultMsg:"")+'</div></div></div></div>';
             }else{
 	            _domCreat.content = '<div class="dialogView-m-main mobile-dialogView '+(_config.className?_config.className:"")+'" times="'+dialogView.index+'" style="z-index:'+(_config.zIndex+1)+'"><div class="dialogView-m-section">' +
-	                                '<div class="dialogView-m-wrap"><div class="dialogView-m-content">'+(_config.message?_config.message:"")+'</div>' +
+	                                '<div class="dialogView-m-wrap '+(_config.type ? 'dialogView-m-'+_config.type : "")+'"> '+this.titleUI()+' <div class="dialogView-m-content">'+(_config.message?_config.message:"")+'</div>' +
 	                                '<div class="dialogView-m-buttons"></div></div></div></div>';
             }
             _body.append(_domCreat.shade,_domCreat.content);
@@ -84,14 +84,20 @@
             _config.showTime && (_bomCache.wrap.attr("showTime",_config.showTime),this.close(_bomCache.main,_bomCache.shade,_config.showTime));
             this.domCreat = _domCreat;
             this.domCache = _bomCache;
-            this.bindUI(_config,_bomCache);
+            this.buttonsUI(_config,_bomCache);
 	    },
-	    bindUI: function(_config,_bomCache){ 
+	    titleUI: function(){
+	    	var _title = this.config.title;
+	    	if(commonsPart.isArray(_title)){
+	    		return '<div class="dialogView-m-title" style='+(_title[1] ? _title[1] : "")+'><h3>'+_title[0]+'</h3></div>';
+	    	}else{return ""}
+	    },
+	    buttonsUI: function(_config,_bomCache){ 
 	    	if(commonsPart.isArray(_config.buttons)){
 		    	_config.buttons.forEach(function(v,i){
-	        		var _states = v.states ? v.states : "";
+	        		var _skin = v.skin ? v.skin : "";
 	        		var _text = v.text ? v.text : _config.defaultText;
-                    var buttonWrap = $("<span data-btn='button' data-state='"+_states+"' class='"+_states+"'>"+_text+"</span>");
+                    var buttonWrap = $("<span data-btn='button' data-skin='"+_skin+"' class='"+_skin+"'>"+_text+"</span>");
 	        		_bomCache.buttons.append(buttonWrap);
 	        		if(commonsPart.isFunction(v.callback)){
 	        			buttonWrap.click(function(){
@@ -99,8 +105,10 @@
 	        			})
 	        		}
 	        	})
+	        }else{
+	        	_bomCache.buttons.remove();
 	        }
-        	_bomCache.wrap.find("[data-state]").click(function(){
+        	_bomCache.wrap.find("[data-skin]").click(function(){
         		this.close(_bomCache.main,_bomCache.shade);
         	}.bind(this))
 	    },
