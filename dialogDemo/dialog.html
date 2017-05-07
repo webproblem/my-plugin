@@ -16,7 +16,7 @@
     <button id="button3">我是按钮3,询问信息框</button>
     <button id="button4">我是按钮4,提示类型框</button>
     <button id="button5">我是按钮5,自定义弹窗标题</button>
-    <button id="button6">我是按钮6</button>
+    <button id="button6">我是按钮6,从底部弹出提示</button>
     <button id="button7">我是按钮7</button>
     <button id="button8">我是按钮8</button>
     <button id="button9">我是按钮9</button>
@@ -69,11 +69,19 @@
         $("#button5").click(function(event) {
         	dialogView.open({
         		title: [
-                    "我是自定义标题"
+                    "<span>我是自定义标题</span><i class='demo-title-close' closeable='true'></i>"
     			],
     			message: "自定义风格标题,第一个参数为标题内容,第二个参数为自定义的样式",
-    			showTime: 3000
+                shadeClose: true,
         	})
+        });
+        $("#button6").click(function(event) {
+            dialogView.open({
+                type: "footmsg",
+                message: "我是底部提示框",
+                animate: "up",
+                shadeClose: true
+            })
         });
     </script>
 </body>

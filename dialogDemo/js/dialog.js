@@ -1,4 +1,4 @@
-;!(function(win,doc){
+;!(function(win,doc,undefined){
 	var _dialogView = dialogView;
 	var commonsPart = {
 		isObject: function(data){
@@ -57,8 +57,10 @@
 	            buttons: null,                           //按钮
 	            message: null,                           //文字
 	            showTime: null,                          //显示时间
+	            skin: null,                              //皮肤定制
 	            shade: true,                             //是否需要遮罩层
 	            shadeClose: false,                       //点击遮罩层是否关闭弹窗
+	            closeable: null,                         //点击按钮是否关闭弹窗
 	            zIndex: 9999999,                         //默认z-index值
 	            defaultText: "按钮",                     //默认按钮文字
 	            defaultMsg: "欢迎使用",                  //默认文字
@@ -78,12 +80,13 @@
             ++dialogView.index;
             _config.zIndex += dialogView.index;
             _domCreat.shade = _config.shade ? '<div class="dialogView-m-shade" times="'+dialogView.index+'" style="z-index:'+_config.zIndex+'"></div>' : "";
+            _domCreat.animate = _config.animate ? "dialogView-m-anim-"+_config.animate : "dialogView-m-anim-open";
             if(!this.isConfig){
             	_domCreat.content = '<div class="mobile-dialogView" times="'+dialogView.index+'">'+_domCreat.shade+'<div class="dialogView-m-main dialogView-m-aniamte" style="z-index:'+(_config.zIndex+1)+'"><div class="dialogView-m-section">' +
 	                                '<div class="dialogView-m-wrap"><div class="dialogView-m-content">'+(_config.defaultMsg?_config.defaultMsg:"")+'</div></div></div></div></div>';
             }else{
-	            _domCreat.content = '<div class="mobile-dialogView '+(_config.className?_config.className:"")+'" times="'+dialogView.index+'">'+_domCreat.shade+'<div class="dialogView-m-main dialogView-m-aniamte" style="z-index:'+(_config.zIndex+1)+'"><div class="dialogView-m-section">' +
-	                                '<div class="dialogView-m-wrap '+(_config.type ? 'dialogView-m-'+_config.type : "")+'"> '+this.titleUI()+' <div class="dialogView-m-content">'+(_config.message?_config.message:"")+'</div>' +
+	            _domCreat.content = '<div class="mobile-dialogView '+(_config.className?_config.className:"")+'" times="'+dialogView.index+'">'+_domCreat.shade+'<div class="dialogView-m-main dialogView-m-aniamte '+_domCreat.animate+'" style="z-index:'+(_config.zIndex+1)+'"><div class="dialogView-m-section">' +
+	                                '<div class="dialogView-m-wrap '+(_config.type ? 'dialogView-m-'+_config.type : "")+' '+(_config.skin?_config.skin:"")+'"> '+this.titleUI()+' <div class="dialogView-m-content">'+(_config.message?_config.message:"")+'</div>' +
 	                                '<div class="dialogView-m-buttons"></div></div></div></div></div>';
             }
             _body.append(_domCreat.content);
@@ -107,18 +110,23 @@
 	    	//设置了showTime值就自动关闭
 	    	_bomCache.view.attr("showTime") && this.close(_bomCache.view.attr("times"));
             //点击遮罩层自动关闭
-            _bomCache.shade.click(function(event) {
-            	(_config.shade && _config.shadeClose) && _this_.close($(this).attr("times"));
-            });
+            (function(){
+            	_bomCache.main.on("click",function(event) {
+	            	(_config.shade && _config.shadeClose) && (function(){
+	            		_this_.close($(this).parents(".mobile-dialogView").attr("times"));
+	            	}.bind(this))()
+	            });
+	            _bomCache.wrap.on("click",function(e){e.stopPropagation();})
+            })()
 	    	
-	    	_bomCache.wrap.find("[data-skin]").click(function(event){
-        		this.close(_bomCache.view.attr("times"));
+	    	_bomCache.main.find("[closeable=true]").on("click",function(event){
+        		this.close(_bomCache.view.attr("times"),"eventClose");
         	}.bind(this))
 	    },
 	    titleUI: function(){
 	    	var _title = this.config.title;
 	    	if(commonsPart.isArray(_title)){
-	    		return '<div class="dialogView-m-title" style='+(_title[1] ? _title[1] : "")+'><h3>'+_title[0]+'</h3></div>';
+	    		return '<div class="dialogView-m-title" style='+(_title[1] ? _title[1] : "")+'>'+_title[0]+'</div>';
 	    	}else{return "";}
 	    },
 	    buttonsUI: function(_config,_bomCache){ 
@@ -129,7 +137,8 @@
 	    	_config.buttons.forEach(function(v,i){
         		var _skin = v.skin ? v.skin : "";
         		var _text = v.text ? v.text : _config.defaultText;
-                var buttonWrap = $("<span data-btn='button' data-skin='"+_skin+"' class='"+_skin+"'>"+_text+"</span>");
+        		var _closeable = v.closeable!=undefined ? v.closeable : true;
+                var buttonWrap = $("<span data-btn='button' closeable="+_closeable+" data-skin='"+_skin+"' class='"+_skin+"'>"+_text+"</span>");
         		_bomCache.buttons.append(buttonWrap);
         		if(commonsPart.isFunction(v.callback)){
         			buttonWrap.click(function(){
@@ -138,10 +147,10 @@
         		}
         	})
 	    },
-	    close: function(times){
+	    close: function(times,closeType){
 	    	var _times = times;
 	    	var _view= _times ? $(".mobile-dialogView[times="+_times+"]") : $(".mobile-dialogView");
-	    	var _showTime = _times ? $(".mobile-dialogView[times="+_times+"]").attr("showTime") : 0;
+	    	var _showTime = closeType ? 0 : (_times ? $(".mobile-dialogView[times="+_times+"]").attr("showTime") : 0);
 	    	setTimeout(function(){
 	    		_view.find(".dialogView-m-main").addClass('dialogView-m-anim-close');
                 _view.stop().unbind("click");

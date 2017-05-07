@@ -1,3 +1,16 @@
 *{padding: 0;margin: 0;}
 body{padding: 20px;font-size: 14px;}
 button{font-size: 14px;width: 100%;background-color: green;color: #fff;padding: 10px;margin: 20px 0;border-radius: 5px;}
+
+
+
+.demo-title-close{
+	width: 25px;
+    height: 25px;
+    background: url(http://consumer-res.huaweistatic.com/en/ucmc/groups/public/documents/webasset/img_con_v27_icon_sprite_svg.svg?2017-04-21-09:40) -1px -17px no-repeat!important;
+    display: block;
+    position: absolute;
+    right: 10px;
+    top: 15px;
+    cursor: pointer;
+}

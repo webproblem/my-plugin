@@ -3,7 +3,7 @@
 }
 .dialogView-m-shade{
 	background-color: #000;
-	opacity: 0.3;
+	opacity: 0.6;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -18,8 +18,6 @@
 	top: 0px;
 	left: 0px;
 	display: table;
-	animation: bounceIn .5s;
-	-webkit-animation: bounceIn .5s;
 }
 .dialogView-m-aniamte.dialogView-m-main{
 	-webkit-animation-fill-mode: both;
@@ -42,9 +40,13 @@
 	font-size: 14px;
 	box-shadow: 0 0 8px rgba(0,0,0,.1);
 }
+.dialogView-m-anim-open{
+    animation: m-animate-in .5s;
+	-webkit-animation: m-animate-in .5s;
+}
 .dialogView-m-anim-close{
-	animation: bounceOut;
-	-webkit-animation: bounceOut;
+	animation: m-animate-out;
+	-webkit-animation: m-animate-out;
 	-webkit-animation-duration: .2s;
     animation-duration: .2s;
 }
@@ -53,6 +55,8 @@
 	background-color: #FF4351;
     color: #fff;
     border-radius: 3px 3px  0px 0px;
+    font-size: 1.3em;
+    position: relative;
 }
 .dialogView-m-main .dialogView-m-content{
 	padding: 50px 30px;
@@ -97,8 +101,26 @@
 .dialogView-m-msg .dialogView-m-content{
 	padding: 15px;
 }
+.dialogView-m-main .dialogView-m-footmsg{
+	    position: fixed;
+	    margin: 0 auto;
+	    width: 90%;
+	    max-width: 100%;
+	    left: 0px;
+	    right: 0px;
+	    bottom: 10px;
+	    opacity: .8;
+	    background-color: #fff;
+}
+.dialogView-m-footmsg .dialogView-m-content{
+	padding: 18px;
+}
+.mobile-dialogView .dialogView-m-anim-up{
+	animation: m-animate-up .3s;
+	-webkit-animation: m-animate-up .3s;
+}
 /*=============== animate ==================*/
-@-webkit-keyframes bounceIn{
+@-webkit-keyframes m-animate-in{
 	0% {
         opacity: 0;
         -webkit-transform: scale(.5);
@@ -111,7 +133,7 @@
         transform: scale(1)
     }
 }
-@keyframes bounceIn{
+@keyframes m-animate-in{
 	0% {
         opacity: 0;
         -webkit-transform: scale(.5);
@@ -124,13 +146,12 @@
         transform: scale(1)
     }
 }
-@keyframes bounceOut{
+@keyframes m-animate-out{
 	100% {
         opacity: 0;
         -webkit-transform: scale(0);
         -ms-transform: scale(0);
         transform: scale(0) 
-    }
     }
     0% {
         -webkit-transform: scale(1);
@@ -138,7 +159,7 @@
         transform: scale(1)
     }
 }
-@-webkit-keyframes bounceOut{
+@-webkit-keyframes m-animate-out{
 	100% {
         opacity: 0;
         -webkit-transform: scale(0);
@@ -149,5 +170,34 @@
         -webkit-transform: scale(1);
         -ms-transform: scale(1);
         transform: scale(1)
+    }
+}
+
+@keyframes m-animate-up{
+	0% {
+        -webkit-transform: translateY(100px);
+        -ms-transform: translateY(100px);
+        transform: translateY(100px);
+        opacity: 0;
+    }
+	100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+        transform: translateY(0) 
+    }
+}
+@-webkit-keyframes m-animate-up{
+	0% {
+        -webkit-transform: translateY(100px);
+        -ms-transform: translateY(100px);
+        transform: translateY(100px);
+        opacity: 0;
+    }
+	100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+        transform: translateY(0) 
     }
 }
