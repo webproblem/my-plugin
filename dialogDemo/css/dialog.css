@@ -40,16 +40,6 @@
 	font-size: 14px;
 	box-shadow: 0 0 8px rgba(0,0,0,.1);
 }
-.dialogView-m-anim-open{
-    animation: m-animate-in .5s;
-	-webkit-animation: m-animate-in .5s;
-}
-.dialogView-m-anim-close{
-	animation: m-animate-out;
-	-webkit-animation: m-animate-out;
-	-webkit-animation-duration: .2s;
-    animation-duration: .2s;
-}
 .dialogView-m-main .dialogView-m-title{
 	padding: 15px 0px;
 	background-color: #FF4351;
@@ -81,11 +71,11 @@
 .dialogView-m-buttons [data-btn=button]:nth-last-child(1){
     border-radius: 0 0 3px 3px;
 }
-.dialogView-m-buttons [data-btn=button].yes{
+.dialogView-m-buttons [data-btn=button][data-skin=yes]{
 	background-color: #2e8ded;
 	color: #fff;
 }
-.dialogView-m-buttons [data-btn=button].no{
+.dialogView-m-buttons [data-btn=button][data-skin=no]{
 	background-color: #eee;
 	color: #FD482C;
 }
@@ -98,13 +88,14 @@
 	opacity: .6;
 	margin: 0px 7px;
 }
-.dialogView-m-msg .dialogView-m-content{
+.mobile-dialogView .dialogView-m-msg .dialogView-m-content{
 	padding: 15px;
 }
-.dialogView-m-main .dialogView-m-footmsg{
+.mobile-dialogView .dialogView-m-main .dialogView-m-footmsg,
+.mobile-dialogView .dialogView-m-main .dialogView-m-footalert{
 	    position: fixed;
 	    margin: 0 auto;
-	    width: 90%;
+	    width: 96%;
 	    max-width: 100%;
 	    left: 0px;
 	    right: 0px;
@@ -112,14 +103,33 @@
 	    opacity: .8;
 	    background-color: #fff;
 }
-.dialogView-m-footmsg .dialogView-m-content{
+.mobile-dialogView .dialogView-m-footmsg .dialogView-m-content,
+.mobile-dialogView .dialogView-m-footalert .dialogView-m-content
+{
 	padding: 18px;
+}
+.mobile-dialogView .dialogView-m-footalert .dialogView-m-buttons{
+	border-top: 1px solid #d0c9c9;
+	display: block;
+}
+/*=============== animate ==================*/
+.dialogView-m-anim-open{
+    animation: m-animate-in .5s;
+	-webkit-animation: m-animate-in .5s;
+}
+.dialogView-m-anim-close{
+	animation: m-animate-out .2s;
+	-webkit-animation: m-animate-out .2s;
 }
 .mobile-dialogView .dialogView-m-anim-up{
 	animation: m-animate-up .3s;
 	-webkit-animation: m-animate-up .3s;
 }
-/*=============== animate ==================*/
+.mobile-dialogView .dialogView-m-anim-down{
+	animation: m-animate-down .3s;
+	-webkit-animation: m-animate-down .3s;
+}
+
 @-webkit-keyframes m-animate-in{
 	0% {
         opacity: 0;
@@ -195,6 +205,35 @@
         opacity: 0;
     }
 	100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+        transform: translateY(0) 
+    }
+}
+
+@-webkit-keyframes m-animate-down{
+	100% {
+        -webkit-transform: translateY(100px);
+        -ms-transform: translateY(100px);
+        transform: translateY(100px);
+        opacity: 0;
+    }
+	0% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+        transform: translateY(0) 
+    }
+}
+@keyframes m-animate-down{
+	100% {
+        -webkit-transform: translateY(100px);
+        -ms-transform: translateY(100px);
+        transform: translateY(100px);
+        opacity: 0;
+    }
+	0% {
         opacity: 1;
         -webkit-transform: translateY(0);
         -ms-transform: translateY(0);
