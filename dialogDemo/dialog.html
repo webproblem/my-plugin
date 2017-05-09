@@ -19,7 +19,8 @@
     <button id="button6">我是按钮6,从底部弹出提示</button>
     <button id="button7">我是按钮7,从底部弹出对话框</button>
     <button id="button8">我是按钮8,从底部弹出的页面层</button>
-    <button id="button9">我是按钮9</button>
+    <button id="button9">我是按钮9,支持DOM对象的meaasge参数</button>
+    <div id="info">我是全屏页面层，3秒后自动关闭</div>
 
 
     <script>
@@ -30,10 +31,6 @@
     		dialogView.alert({
     			message: "<h3>alert默认信息框</h3>",
     			className: "dialogView-alert",
-    			//type: "alert",
-    			//area: ["300px","200px"],
-    			//showTime: 10000000,
-    			//skin:"",
     			buttons:[{
     				skin: "yes",
     				text: "我知道了",
@@ -111,6 +108,15 @@
                 styles: "position: fixed;height: 200px;width: 100%;padding: 0;bottom: 0px;opacity: 1;",
                 shadeClose: true
             });
+        });
+        $("#button9").click(function(event) {
+            dialogView.open({
+                type: "footmsg",
+                animate: "up",
+                message: $("#info").show() || document.getElementById("info"),
+                styles: "position: fixed;height: 100%;width: 100%;padding: 0;bottom: 0px;opacity: 1;",
+                showTime: 3000
+            })
         });
     </script>
 </body>

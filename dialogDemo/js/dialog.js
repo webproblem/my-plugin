@@ -16,6 +16,12 @@
 			        return false;
 			}
 			return true;
+		},
+		isDom: function(data){
+			if(!data) return false;
+			if(data && data instanceof jQuery) return data[0].outerHTML;
+			if(data instanceof HTMLElement || (typeof data === 'object' && data.nodeType === 1 && typeof data.nodeName === 'string')) return data.outerHTML;
+			return data;
 		}
 	};
 	var dialogView = {
@@ -86,12 +92,13 @@
             _domCreat.type = _config.type ? 'dialogView-m-'+_config.type : "";
             _domCreat.buttons = _config.buttons ? '<div class="dialogView-m-buttons"></div>' : "";
             _domCreat.styles = _config.styles ? _config.styles : "";
+            _domCreat.message = _config.message ? commonsPart.isDom(_config.message) : "";
             if(!this.isConfig){
             	_domCreat.content = '<div class="mobile-dialogView" data-animate="'+_config.animate+'" times="'+dialogView.index+'">'+_domCreat.shade+'<div class="dialogView-m-main dialogView-m-aniamte '+_domCreat.animate+'" style="z-index:'+(_config.zIndex+1)+'"><div class="dialogView-m-section">' +
 	                                '<div class="dialogView-m-wrap"><div class="dialogView-m-content">'+(_config.defaultMsg?_config.defaultMsg:"")+'</div></div></div></div></div>';
             }else{
 	            _domCreat.content = '<div class="mobile-dialogView '+(_config.className?_config.className:"")+'" data-animate="'+_config.animate+'" times="'+dialogView.index+'">'+_domCreat.shade+'<div class="dialogView-m-main dialogView-m-aniamte '+_domCreat.animate+'" style="z-index:'+(_config.zIndex+1)+'"><div class="dialogView-m-section">' +
-	                                '<div class="dialogView-m-wrap '+_domCreat.type+' '+(_config.skin?_config.skin:"")+'" style="'+_domCreat.styles+'"> '+this.titleUI()+' <div class="dialogView-m-content">'+(_config.message?_config.message:"")+'</div>' +
+	                                '<div class="dialogView-m-wrap '+_domCreat.type+' '+(_config.skin?_config.skin:"")+'" style="'+_domCreat.styles+'"> '+this.titleUI()+' <div class="dialogView-m-content">'+_domCreat.message+'</div>' +
 	                                ''+_domCreat.buttons+'</div></div></div></div>';
             }
             _body.append(_domCreat.content);
@@ -113,25 +120,25 @@
 	    bindUI: function(_config,_domCache){
 	    	var _this_ = this;
 	    	//设置了showTime值就自动关闭
-	    	_domCache.view.attr("showTime") && this.close(_domCache.view.attr("times"));
+	    	_domCache.view.attr("showTime") && this.close(_domCache.view);
             //点击遮罩层自动关闭
             (function(){
             	_domCache.main.on("click",function(event) {
 	            	(_config.shade && _config.shadeClose) && (function(){
-	            		_this_.close($(this).parents(".mobile-dialogView").attr("times"));
+	            		_this_.close($(this).parents(".mobile-dialogView"));
 	            	}.bind(this))()
 	            });
 	            _domCache.wrap.on("click",function(e){e.stopPropagation();})
             })()
 	    	
 	    	_domCache.main.find("[closeable=true]").on("click",function(event){
-        		this.close(_domCache.view.attr("times"),"eventClose");
+        		this.close(_domCache.view,"eventClose");
         	}.bind(this))
 	    },
 	    titleUI: function(){
 	    	var _title = this.config.title;
 	    	if(commonsPart.isObject(_title)){
-	    		return '<div class="dialogView-m-title '+(_title.skin?_title.skin:"")+'" style='+(_title.styles ? _title.styles : "")+'>'+_title.content+'</div>';
+	    		return '<div class="dialogView-m-title '+(_title.skin?_title.skin:"")+'" style='+(_title.styles ? _title.styles : "")+'>'+commonsPart.isDom(_title.content)+'</div>';
 	    	}else{return "";}
 	    },
 	    buttonsUI: function(_config,_domCache){ 
@@ -155,10 +162,9 @@
         		}
         	})
 	    },
-	    close: function(times,closeType){
-	    	var _times = times;
-	    	var _view= _times ? $(".mobile-dialogView[times="+_times+"]") : $(".mobile-dialogView");
-	    	var _showTime = closeType ? 0 : (_times ? $(".mobile-dialogView[times="+_times+"]").attr("showTime") : 0);
+	    close: function(view,closeType){
+	    	var _view = view ? $(view) : $(".mobile-dialogView");
+	    	var _showTime = closeType ? 0 : (view ? ($(view).attr("showTime")||0) : 0);
 	    	setTimeout(function(){
 	    		var _class = _view.data("animate")=="up" ? "dialogView-m-anim-down" : "dialogView-m-anim-close";
 	    		_view.find(".dialogView-m-main").addClass(_class);
