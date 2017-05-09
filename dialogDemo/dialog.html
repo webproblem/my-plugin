@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="./css/demo.css">
 	<link rel="stylesheet" href="./css/dialog.css">
 	<script src="./js/jquery.js"></script>
-	<script src="./js/dialog.min.js"></script> 
+	<script src="./js/dialog.js"></script> 
 </head>
 <body>
     <button id="button1">我是按钮1,不传任何参数</button>
@@ -18,7 +18,7 @@
     <button id="button5">我是按钮5,自定义弹窗标题</button>
     <button id="button6">我是按钮6,从底部弹出提示</button>
     <button id="button7">我是按钮7,从底部弹出对话框</button>
-    <button id="button8">我是按钮8</button>
+    <button id="button8">我是按钮8,从底部弹出的页面层</button>
     <button id="button9">我是按钮9</button>
 
 
@@ -101,6 +101,16 @@
                     }
                 }]
             })
+        });
+        $("#button8").click(function(event) {
+            dialogView.open({
+                type: "footmsg",
+                animate: "up",
+                message: "我是从底部弹出的页面层，支持传入html",
+                //skin: "demo-page",
+                styles: "position: fixed;height: 200px;width: 100%;padding: 0;bottom: 0px;opacity: 1;",
+                shadeClose: true
+            });
         });
     </script>
 </body>

@@ -91,8 +91,8 @@
 .mobile-dialogView .dialogView-m-msg .dialogView-m-content{
 	padding: 15px;
 }
-.mobile-dialogView .dialogView-m-main .dialogView-m-footmsg,
-.mobile-dialogView .dialogView-m-main .dialogView-m-footalert{
+.dialogView-m-main .dialogView-m-footmsg,
+.dialogView-m-main .dialogView-m-footalert{
 	    position: fixed;
 	    margin: 0 auto;
 	    width: 96%;
@@ -103,12 +103,12 @@
 	    opacity: .8;
 	    background-color: #fff;
 }
-.mobile-dialogView .dialogView-m-footmsg .dialogView-m-content,
-.mobile-dialogView .dialogView-m-footalert .dialogView-m-content
+.dialogView-m-main .dialogView-m-footmsg .dialogView-m-content,
+.dialogView-m-main .dialogView-m-footalert .dialogView-m-content
 {
 	padding: 18px;
 }
-.mobile-dialogView .dialogView-m-footalert .dialogView-m-buttons{
+.dialogView-m-main .dialogView-m-footalert .dialogView-m-buttons{
 	border-top: 1px solid #d0c9c9;
 	display: block;
 }
@@ -185,9 +185,9 @@
 
 @keyframes m-animate-up{
 	0% {
-        -webkit-transform: translateY(100px);
-        -ms-transform: translateY(100px);
-        transform: translateY(100px);
+        -webkit-transform: translateY(500px);
+        -ms-transform: translateY(500px);
+        transform: translateY(500px);
         opacity: 0;
     }
 	100% {
@@ -199,9 +199,9 @@
 }
 @-webkit-keyframes m-animate-up{
 	0% {
-        -webkit-transform: translateY(100px);
-        -ms-transform: translateY(100px);
-        transform: translateY(100px);
+        -webkit-transform: translateY(500px);
+        -ms-transform: translateY(500px);
+        transform: translateY(500px);
         opacity: 0;
     }
 	100% {
@@ -214,9 +214,9 @@
 
 @-webkit-keyframes m-animate-down{
 	100% {
-        -webkit-transform: translateY(100px);
-        -ms-transform: translateY(100px);
-        transform: translateY(100px);
+        -webkit-transform: translateY(500px);
+        -ms-transform: translateY(500px);
+        transform: translateY(500px);
         opacity: 0;
     }
 	0% {
@@ -228,9 +228,9 @@
 }
 @keyframes m-animate-down{
 	100% {
-        -webkit-transform: translateY(100px);
-        -ms-transform: translateY(100px);
-        transform: translateY(100px);
+        -webkit-transform: translateY(500px);
+        -ms-transform: translateY(500px);
+        transform: translateY(500px);
         opacity: 0;
     }
 	0% {

@@ -85,12 +85,13 @@
             _domCreat.animate = _config.animate ? "dialogView-m-anim-"+_config.animate : "dialogView-m-anim-open";
             _domCreat.type = _config.type ? 'dialogView-m-'+_config.type : "";
             _domCreat.buttons = _config.buttons ? '<div class="dialogView-m-buttons"></div>' : "";
+            _domCreat.styles = _config.styles ? _config.styles : "";
             if(!this.isConfig){
             	_domCreat.content = '<div class="mobile-dialogView" data-animate="'+_config.animate+'" times="'+dialogView.index+'">'+_domCreat.shade+'<div class="dialogView-m-main dialogView-m-aniamte '+_domCreat.animate+'" style="z-index:'+(_config.zIndex+1)+'"><div class="dialogView-m-section">' +
 	                                '<div class="dialogView-m-wrap"><div class="dialogView-m-content">'+(_config.defaultMsg?_config.defaultMsg:"")+'</div></div></div></div></div>';
             }else{
 	            _domCreat.content = '<div class="mobile-dialogView '+(_config.className?_config.className:"")+'" data-animate="'+_config.animate+'" times="'+dialogView.index+'">'+_domCreat.shade+'<div class="dialogView-m-main dialogView-m-aniamte '+_domCreat.animate+'" style="z-index:'+(_config.zIndex+1)+'"><div class="dialogView-m-section">' +
-	                                '<div class="dialogView-m-wrap '+_domCreat.type+' '+(_config.skin?_config.skin:"")+'"> '+this.titleUI()+' <div class="dialogView-m-content">'+(_config.message?_config.message:"")+'</div>' +
+	                                '<div class="dialogView-m-wrap '+_domCreat.type+' '+(_config.skin?_config.skin:"")+'" style="'+_domCreat.styles+'"> '+this.titleUI()+' <div class="dialogView-m-content">'+(_config.message?_config.message:"")+'</div>' +
 	                                ''+_domCreat.buttons+'</div></div></div></div>';
             }
             _body.append(_domCreat.content);
@@ -130,7 +131,7 @@
 	    titleUI: function(){
 	    	var _title = this.config.title;
 	    	if(commonsPart.isObject(_title)){
-	    		return '<div class="dialogView-m-title" style='+(_title.styles ? _title.styles : "")+'>'+_title.content+'</div>';
+	    		return '<div class="dialogView-m-title '+(_title.skin?_title.skin:"")+'" style='+(_title.styles ? _title.styles : "")+'>'+_title.content+'</div>';
 	    	}else{return "";}
 	    },
 	    buttonsUI: function(_config,_domCache){ 
