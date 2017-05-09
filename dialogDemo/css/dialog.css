@@ -88,7 +88,7 @@
 	opacity: .6;
 	margin: 0px 7px;
 }
-.mobile-dialogView .dialogView-m-msg .dialogView-m-content{
+.dialogView-m-main .dialogView-m-msg .dialogView-m-content{
 	padding: 15px;
 }
 .dialogView-m-main .dialogView-m-footmsg,
@@ -121,11 +121,11 @@
 	animation: m-animate-out .2s;
 	-webkit-animation: m-animate-out .2s;
 }
-.mobile-dialogView .dialogView-m-anim-up{
+.dialogView-m-anim-up{
 	animation: m-animate-up .3s;
 	-webkit-animation: m-animate-up .3s;
 }
-.mobile-dialogView .dialogView-m-anim-down{
+.dialogView-m-anim-down{
 	animation: m-animate-down .3s;
 	-webkit-animation: m-animate-down .3s;
 }
@@ -134,12 +134,14 @@
 	0% {
         opacity: 0;
         -webkit-transform: scale(.5);
+        -ms-transform: scale(.5);
         transform: scale(.5)
     }
 
     100% {
         opacity: 1;
         -webkit-transform: scale(1);
+        -ms-transform: scale(1);
         transform: scale(1)
     }
 }
@@ -147,12 +149,14 @@
 	0% {
         opacity: 0;
         -webkit-transform: scale(.5);
+        -ms-transform: scale(.5)
         transform: scale(.5)
     }
 
     100% {
         opacity: 1;
         -webkit-transform: scale(1);
+        -ms-transform: scale(1)
         transform: scale(1)
     }
 }
