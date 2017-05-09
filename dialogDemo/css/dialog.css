@@ -91,8 +91,8 @@
 .dialogView-m-main .dialogView-m-msg .dialogView-m-content{
 	padding: 15px;
 }
-.dialogView-m-main .dialogView-m-footmsg,
-.dialogView-m-main .dialogView-m-footalert{
+.dialogView-m-main .dialogView-m-footMsg,
+.dialogView-m-main .dialogView-m-footConfirm{
 	    position: fixed;
 	    margin: 0 auto;
 	    width: 96%;
@@ -103,12 +103,12 @@
 	    opacity: .8;
 	    background-color: #fff;
 }
-.dialogView-m-main .dialogView-m-footmsg .dialogView-m-content,
-.dialogView-m-main .dialogView-m-footalert .dialogView-m-content
+.dialogView-m-main .dialogView-m-footMsg .dialogView-m-content,
+.dialogView-m-main .dialogView-m-footConfirm .dialogView-m-content
 {
 	padding: 18px;
 }
-.dialogView-m-main .dialogView-m-footalert .dialogView-m-buttons{
+.dialogView-m-main .dialogView-m-footConfirm .dialogView-m-buttons{
 	border-top: 1px solid #d0c9c9;
 	display: block;
 }

@@ -73,7 +73,7 @@
         });
         $("#button6").click(function(event) {
             dialogView.open({
-                type: "footmsg",
+                type: "footMsg",
                 message: "我是底部提示框",
                 animate: "up",
                 shadeClose: true
@@ -81,7 +81,7 @@
         });
         $("#button7").click(function(event) {
             dialogView.open({
-                type: "footalert",
+                type: "footConfirm",
                 animate: "up",
                 message: "我是从底部弹出的对话框",
                 buttons: [{
@@ -101,7 +101,7 @@
         });
         $("#button8").click(function(event) {
             dialogView.open({
-                type: "footmsg",
+                type: "footMsg",
                 animate: "up",
                 message: "我是从底部弹出的页面层，支持传入html",
                 //skin: "demo-page",
@@ -111,7 +111,7 @@
         });
         $("#button9").click(function(event) {
             dialogView.open({
-                type: "footmsg",
+                type: "footMsg",
                 animate: "up",
                 message: $("#info").show() || document.getElementById("info"),
                 styles: "position: fixed;height: 100%;width: 100%;padding: 0;bottom: 0px;opacity: 1;",

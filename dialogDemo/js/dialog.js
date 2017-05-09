@@ -27,8 +27,9 @@
 	var dialogView = {
 		"version": "0.0.1",
 		"author": "yqx_cn",
+		"github:": "https://github.com/webproblem",
 		"index": 0,
-		"type": ["alert","confirm","msg"],
+		"type": ["alert","confirm","msg","footConfirm","footMsg"],
 		"open": function(options){
 			DialogViewPro(options);
 			return this;
@@ -145,8 +146,8 @@
 	    	var buttonsData = [];
 	    	(function(){
 	    		if(_config.type == dialogView.type[0]){buttonsData.push(_config.buttons[0]); return;}
-	    		if(_config.type == dialogView.type[1]){_config.buttons.splice(2,_config.buttons.length - 2);buttonsData = _config.buttons; return;}
-	    		if(_config.type == dialogView.type[2]){buttonsData = null; return;}
+	    		if(_config.type == dialogView.type[1] || _config.type == dialogView.type[3]){_config.buttons.splice(2,_config.buttons.length - 2);buttonsData = _config.buttons; return;}
+	    		if(_config.type == dialogView.type[2] || _config.type == dialogView.type[4]){buttonsData = null; return;}
 	    		buttonsData = _config.buttons;
 	    	})()
 	    	buttonsData && buttonsData.forEach(function(v,i){
