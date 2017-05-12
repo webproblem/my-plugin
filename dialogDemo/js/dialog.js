@@ -177,5 +177,7 @@
 	    }
 	}
     DialogViewPro.prototype.init.prototype = DialogViewPro.prototype;
-	win.dialogView = dialogView;
+	"function" == typeof define ? define(function(){
+	    return dialogView;
+	}) : "undefined" != typeof exports ? module.exports = dialogView : win.dialogView = dialogView;
 })(window,document)
