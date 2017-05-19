@@ -103,7 +103,6 @@ dialogView支持链式调用，如：dialogView.alert({message: "alert默认信�
 
 
 Demo示例效果预览地址: [https://webproblem.github.io/hello-world/dialogDemo/dialog.html](https://webproblem.github.io/hello-world/dialogDemo/dialog.html)
-<<<<<<< HEAD
 
 **如果喜欢，请记得Star哈！**
 
