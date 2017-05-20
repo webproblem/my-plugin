@@ -1,5 +1,11 @@
 (function(window,document,undefined){
     var _DragView = DragView;
+	var getDom = function(data){
+		if(!data) return false;
+		if("function" == typeof jQuery && (data && data instanceof jQuery)) return data[0];
+		if(data instanceof HTMLElement || (typeof data === 'object' && data.nodeType === 1 && typeof data.nodeName === 'string')) return data;
+		return data;
+	}
     var DragView = function(options){
 	    this.defaultSettings = {
 		    "dragWrap": document.body,
@@ -10,8 +16,9 @@
 			"dragStatus": false
 		};
 		this.options = this.extend(this.defaultSettings,options);
+		this.options.dragWrap = getDom(this.options.dragWrap);
 		this.options.tempDragWrap = this.options.dragWrap;
-		this.options.dragableArea = this.options.dragableArea ? this.options.dragableArea : this.options.dragWrap;
+		this.options.dragableArea = this.options.dragableArea ? getDom(this.options.dragableArea) : this.options.dragWrap;
         this.init();
     }
 	DragView.prototype = {
@@ -55,28 +62,23 @@
 				var disX = events.clientX - dragWrap.offsetLeft;
 				var disY = events.clientY - dragWrap.offsetTop;
 				document.getElementsByClassName("dragview_move")[0].style.display = "block";
-				dragWrap.style.position = "absolute";
-				dragWrap.style.zIndex = "99999";
 				that.options.tempDragWrap = that.options.dragWrap;
 				if(that.options.isDummyWrap){
+				    var styles = "width:" + dragWrap.clientWidth + "px" + ";height:" + dragWrap.clientHeight + "px" + ";position:absolute" +
+					             ";z-index:99999" + ";top:" + dragWrap.style.top + ";left:" + dragWrap.style.left;
 					dragMoveArea = document.createElement("div");
 					dragMoveArea.setAttribute("class",that.options.dummyWrapClass);
-					dragMoveArea.style.width = dragWrap.clientWidth + "px";
-					dragMoveArea.style.height = dragWrap.clientHeight + "px";
-					dragMoveArea.style.position = "absolute";
-					dragMoveArea.style.zIndex = "99999";
-					dragMoveArea.style.top = dragWrap.style.top;
-					dragMoveArea.style.left = dragWrap.style.left;
+					dragMoveArea.style = styles;
 					document.body.appendChild(dragMoveArea);
 					that.options.tempDragWrap = dragMoveArea;
                 }				
 				that.options.dragStatus = true;
-				document.onmousemove = function(e){
+				that.options.dragStatus ? document.onmousemove = function(e){
 					that.throttle(function(){
 					    var _events = that.getEvent(e);
 					    that.mouseMove(_events,disX,disY,dragMoveArea);
 					},null,0);
-				}
+				} : "";
 				document.onmouseup = function(){
 					that.options.dragStatus && that.mouseUp(dragMoveArea);
 				}
@@ -113,7 +115,6 @@
 				}else{
 					this.options.tempDragWrap.style.left = option.x + "px";
 				}
-
 				if(option.y <= 0 || option.dragH >= option.winY){
 					this.options.tempDragWrap.style.top = "0px";
 				}
