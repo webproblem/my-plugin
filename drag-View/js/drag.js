@@ -11,7 +11,7 @@
 		    "dragWrap": document.body,
 			"dragableArea": document.body,
 			"isDrag": true,
-			"isDummyWrap": true,
+			"isDummyWrap": false,
 			"dummyWrapClass": "dragview_dummy_wrap",
 			"dragStatus": false
 		};
