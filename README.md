@@ -1,4 +1,4 @@
-**Tab-View:** 轮播选项卡
+**nav-View:** 导航菜单
 
 **drag-View:** 原生js拖拽功能，效果预览地址: [https://webproblem.github.io/hello-world/drag-View/drag.html](https://webproblem.github.io/hello-world/drag-View/drag.html)
 
