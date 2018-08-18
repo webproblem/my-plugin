@@ -102,7 +102,7 @@ dialogView支持链式调用，如：dialogView.alert({message: "alert默认信�
 ![demo-img.PNG](http://upload-images.jianshu.io/upload_images/1501715-b3281e0cf5c0a470.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
-Demo示例效果预览地址: [https://webproblem.github.io/hello-world/dialogDemo/dialog.html](https://webproblem.github.io/hello-world/dialogDemo/dialog.html)
+Demo示例效果预览地址: [https://webproblem.github.io/my-plugin/dialogDemo/dialog.html](https://webproblem.github.io/my-plugin/dialogDemo/dialog.html)
 
 **如果喜欢，请记得Star哈！**
 
